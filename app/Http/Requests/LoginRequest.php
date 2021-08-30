@@ -81,14 +81,6 @@ class LoginRequest extends FormRequest
     {
         $token = $this->authorizeUser();
 
-        /*$this->responseStructured->setStatus(true);
-        $this->responseStructured->addEntity($this->user());
-        $this->responseStructured->addMetadata($token->accessToken, 'accessToken');
-        $this->responseStructured->addMetadata('Bearer', 'tokenType');*/
-
-        //return $this->responseStructured->getResponse();
-        //$this->getAuthResponse($token, $this->user());
-
         return response()->json($this->getAuthResponse($token, $this->user()));
     }
 }

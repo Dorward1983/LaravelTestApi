@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Traits\RandomClassesTrait;
 
 class HomeController extends Controller
 {
+
+    use RandomClassesTrait;
+
     /**
      * Create a new controller instance.
      *
@@ -38,6 +43,6 @@ class HomeController extends Controller
      */
     public function getRandom()
     {
-        return response()->json('HI');
+        return response()->json($this->getRandomResult());
     }
 }

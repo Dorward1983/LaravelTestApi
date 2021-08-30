@@ -37,6 +37,7 @@ trait UserAdapterTrait
         ];
     }
 
+
     public function tokenExpiresToSeconds($created_at, $expires_at)
     {
         return strtotime($expires_at) - strtotime($created_at);

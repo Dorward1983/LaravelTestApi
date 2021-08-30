@@ -15,6 +15,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->decimal('total',  8,  2);
+            $table->decimal('shipping_total',  8, 2);
+            $table->integer('create_time');
+            $table->string('timezone');
             $table->timestamps();
         });
     }
