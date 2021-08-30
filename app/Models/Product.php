@@ -12,7 +12,7 @@ class Product extends Model implements  RandomModelInterface
 
     public static function getRandom()
     {
-        $data = self::inRandomOrder()->first(['title', 'SKU', 'image'])->toArray();
+        $data = static::inRandomOrder()->first(['title', 'SKU', 'image'])->toArray();
         $data['data_type'] = 'product';
         return $data;
     }
