@@ -69,10 +69,10 @@ trait RandomClassesTrait
         $cnt = 0;
         foreach ($data as $key => $value) {
 
-            if ($key != 'image') {
-                $resultStr .= $key . '{' . $value . '}';
-            } else {
+            if (preg_match('/^img\/.*?\.(jpg|gif|png)$/i', $value)) {
                 $resultStr .= $this->getImageData($value);
+            } else {
+                $resultStr .= $key . '{' . $value . '}';
             }
 
             if ($cnt < (count($data) - 1)) {
