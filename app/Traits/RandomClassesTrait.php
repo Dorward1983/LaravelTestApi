@@ -41,19 +41,21 @@ trait RandomClassesTrait
     private function getRandomObject()
     {
         $arRandonClass = $this->getImplementingRandomClasses();
+
         return call_user_func_array([$arRandonClass[rand(0, count($arRandonClass) - 1)], 'getRandom'], []);
     }
 
     /**
      * Generates a response with the data of the App\Contracts\RandomModelInterface instance.
      *
-     * @return array
+     * @return string|array
      */
     private function getRandomResult()
     {
         $data = $this->getRandomObject();
 
         if (empty($data)) {
+
             return [
                 'status' => 'error',
                 'message' => 'Nothing was found'
@@ -68,7 +70,6 @@ trait RandomClassesTrait
 
         $cnt = 0;
         foreach ($data as $key => $value) {
-
             if (preg_match('/^img\/.*?\.(jpg|gif|png)$/i', $value)) {
                 $resultStr .= $this->getImageData($value);
             } else {
@@ -81,10 +82,15 @@ trait RandomClassesTrait
 
             $cnt++;
         }
+
         return $resultStr;
     }
 
-    private  function getImageData(string $path)
+    /**
+     * @param string $path
+     * @return string|void
+     */
+    private function getImageData(string $path)
     {
         $path = storage_path($path);
         $contents = file_get_contents($path);
@@ -94,7 +100,10 @@ trait RandomClassesTrait
             $mime = finfo_file($finfo, $path);
             finfo_close($finfo);
             $mime = str_replace('/', '\\base64;', $mime);
+
             return $mime . '{'.base64_encode($contents) . '}';
         }
+
+        return '';
     }
 }
